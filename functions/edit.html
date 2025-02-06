@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Estudiantes</title>
+    <script src="/js/manageStudentData.js"></script>
+</head>
+<body>
+<h1>Lista de Estudiantes</h1>
+<ul id="studentList"></ul>
+<input id="studentIdToEdit" placeholder="ID del estudiante a editar" type="text">
+<input id="studentName" placeholder="Nombre" type="text">
+<input id="studentLastName" placeholder="Apellido" type="text">
+<input id="studentEmail" placeholder="Email" type="text">
+<input id="studentGrade" placeholder="Nota" type="text">
+<button onclick="editStudent(document.getElementById('studentIdToEdit').value)">Editar Estudiante</button>
+</body>
+</html>

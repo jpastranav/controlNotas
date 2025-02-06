@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Control de Estudiantes</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <script src="/js/manageStudentData.js"></script>
+</head>
+<body>
+<div class="contenedor">
+    <h1>Registro de estudiante</h1>
+    <h3>Ingrese los datos del estudiante</h3>
+    <input id="studentName" placeholder="Nombre" required type="text">
+    <input id="studentLastName" placeholder="Apellido" required type="text">
+    <input id="studentID" placeholder="Ingresa tu ID" required type="text">
+    <input id="studentEmail" placeholder="Ingresa tu Email" required type="text">
+    <input id="studentGrade" placeholder="Ingresa tu Grado" required type="text">
+    <button id="btnRegistrar" onclick=addStudent()>Registrar</button>
+</div>
+</body>
