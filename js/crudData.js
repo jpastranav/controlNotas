@@ -1,48 +1,85 @@
-// Declaración del vector que almacenará los estudiantes
+document.addEventListener("DOMContentLoaded", function () {
+    let btn = document.getElementById("registerBtn");
+    console.log("Botón encontrado:", btn); // Verifica que el botón existe
+    if (btn) {
+        btn.addEventListener("click", addStudent);
+    } else {
+        console.error("No se encontró el botón con id 'registerBtn'");
+    }
+});
+
 let students = [];
 
-// Función para añadir un estudiante
 function addStudent() {
-    // Obtener los valores de los campos de entrada
-    let nameStudent = document.getElementById("studentName").value;
-    let lastNameStudent = document.getElementById("studentLastName").value;
-    let idStudent = document.getElementById("studentId").value;
-    let emailStudent = document.getElementById("studentEmail").value;
-    let gradeStudent = document.getElementById("studentGrade").value;
+    let nameStudent = document.getElementById("studentName").value.trim();
+    let lastNameStudent = document.getElementById("studentLastName").value.trim();
+    let idStudent = document.getElementById("studentID").value.trim();
+    let emailStudent = document.getElementById("studentEmail").value.trim();
+    let gradeStudent = document.getElementById("studentGrade").value.trim();
+    let messageBox = document.getElementById("message");
 
-    // Crear un objeto estudiante con los valores obtenidos
+    console.log("Nombre:", nameStudent);
+    console.log("Apellido:", lastNameStudent);
+    console.log("ID:", idStudent);
+    console.log("Email:", emailStudent);
+    console.log("Nota:", gradeStudent);
+
+    // Validaciones
+    if (!nameStudent || !lastNameStudent || !idStudent || !emailStudent || !gradeStudent) {
+        messageBox.innerText = "Todos los campos son obligatorios.";
+        messageBox.style.color = "red";
+        return;
+    }
+
+    if (!validateEmail(emailStudent)) {
+        messageBox.innerText = "Formato de correo inválido.";
+        messageBox.style.color = "red";
+        return;
+    }
+
+    if (students.some(student => student.id === idStudent)) {
+        messageBox.innerText = "El ID ya está registrado.";
+        messageBox.style.color = "red";
+        return;
+    }
+
     let student = {
         name: nameStudent,
         lastName: lastNameStudent,
         id: idStudent,
         email: emailStudent,
-        grade: gradeStudent
+        grade: parseFloat(gradeStudent)
     };
 
-    // Añadir el objeto estudiante al vector students
     students.push(student);
-    // Mostrar un mensaje de éxito
-    alert("¡Estudiante añadido exitosamente!");
-    // Actualizar la lista de estudiantes mostrada
+    messageBox.innerText = "¡Estudiante añadido exitosamente!";
+    messageBox.style.color = "green";
     displayStudents();
 }
 
-// Función para mostrar la lista de estudiantes
 function displayStudents() {
-    // Obtener el elemento HTML donde se mostrará la lista
-    let studentList = document.getElementById("studentList");
-    // Limpiar la lista antes de mostrar los estudiantes
-    studentList.innerHTML = "";
+    // Obtener el contenedor donde se mostrará la tabla
+    let container = document.getElementById("studentsContainer");
 
-    // Recorrer el vector students y crear un elemento <li> para cada estudiante
-    students.forEach(student => {
-        let listItem = document.createElement("li");
-        listItem.textContent = `Nombre: ${student.name}, Apellido: ${student.lastName}, ID: ${student.id}, Email: ${student.email}, Nota: ${student.grade}`;
-        // Añadir el elemento <li> al elemento <ul>
-        studentList.appendChild(listItem);
-    });
+    // Crear la tabla y su encabezado
+    let table = "<table border='1'><tr><th>Nombre</th><th>Apellido</th><th>ID</th><th>Email</th><th>Nota</th></tr>";
+
+    // Recorrer el array de estudiantes y añadir filas a la tabla
+    for (let i = 0; i < students.length; i++) {
+        table += "<tr><td>" + students[i].name + "</td><td>" + students[i].lastName + "</td><td>" + students[i].id + "</td><td>" + students[i].email + "</td><td>" + students[i].grade + "</td></tr>";
+    }
+
+    // Cerrar la tabla
+    table += "</table>";
+
+    // Insertar la tabla en el contenedor
+    container.innerHTML = table;
 }
 
+function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+ /*
 // Función para eliminar un estudiante por su ID
 function removeStudent(studentId) {
     // Filtrar el vector students para excluir al estudiante con el ID proporcionado
@@ -107,5 +144,4 @@ function displaySearchResults(results) {
         listItem.textContent = `Nombre: ${student.name}, Apellido: ${student.lastName}, ID: ${student.id}, Email: ${student.email}, Nota: ${student.grade}`;
         // Añadir el elemento <li> al elemento <ul>
         searchResultsList.appendChild(listItem);
-    });
-}
+    });*/

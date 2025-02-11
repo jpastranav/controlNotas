@@ -7,7 +7,7 @@ function userExist() {
 
     if (adminUser === verifyUser && adminPassword === verifyPassword) { //Verifica si el usuario y contraseña coinciden con los establecidos por defecto
         alert("Redirigiendo a la página de inicio");
-        window.location.href = "/functions/register.html"; // Redirige a la página deseada
+        window.location.href = "../functions/register.html"; // Redirige a la página deseada
         return true;
     } else {
         alert("Usuario no existe o credenciales incorrectas");
